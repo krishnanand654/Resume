@@ -1,0 +1,30 @@
+name: Convert README to PDF
+
+on:
+  push:
+    paths:
+      - README.md
+
+jobs:
+  convert-to-pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Pandoc
+        run: sudo apt-get install -y pandoc
+
+      - name: Install LaTeX (for better PDF formatting)
+        run: sudo apt-get install -y texlive
+
+      - name: Convert README.md to PDF
+        run: |
+          pandoc README.md -o resume.pdf
+
+      - name: Upload PDF as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: resume
+          path: resume.pdf
