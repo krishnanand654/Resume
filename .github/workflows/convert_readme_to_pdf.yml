@@ -3,7 +3,7 @@ name: Convert LaTeX to PDF
 on:
   push:
     paths:
-      - resume.tex
+      - '**'
 
 jobs:
   convert-to-pdf:
