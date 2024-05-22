@@ -1,9 +1,9 @@
-name: Convert README to PDF
+name: Convert LaTeX to PDF
 
 on:
   push:
     paths:
-      - README.md
+      - resume.tex
 
 jobs:
   convert-to-pdf:
@@ -13,15 +13,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Pandoc
-        run: sudo apt-get install -y pandoc
+      - name: Install LaTeX
+        run: sudo apt-get install -y texlive-full
 
-      - name: Install LaTeX (for better PDF formatting)
-        run: sudo apt-get install -y texlive
-
-      - name: Convert README.md to PDF using LaTeX template
+      - name: Compile LaTeX to PDF
         run: |
-          pandoc README.md -o resume.pdf --from markdown --template=resume_template.tex --metadata title="Your Name - Resume"
+          pdflatex resume.tex
+          pdflatex resume.tex  # Run twice for proper reference handling
 
       - name: Upload PDF as Artifact
         uses: actions/upload-artifact@v2
