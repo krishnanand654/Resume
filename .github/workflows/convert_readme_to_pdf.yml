@@ -19,9 +19,9 @@ jobs:
       - name: Install LaTeX (for better PDF formatting)
         run: sudo apt-get install -y texlive
 
-      - name: Convert README.md to PDF
+      - name: Convert README.md to PDF using LaTeX template
         run: |
-          pandoc README.md -o resume.pdf
+          pandoc README.md -o resume.pdf --from markdown --template=resume_template.tex --metadata title="Your Name - Resume"
 
       - name: Upload PDF as Artifact
         uses: actions/upload-artifact@v2
