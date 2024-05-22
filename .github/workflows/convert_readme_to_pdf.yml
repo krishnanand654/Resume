@@ -12,12 +12,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        run: |
+          cd ../../
 
       - name: LaTeX Action
         uses: fudan-mse/latex-action@v0.0.1
         with:
           root_file: |
-            ../resume.tex
+            resume.tex
 
       - name: Upload PDF as Artifact
         uses: actions/upload-artifact@v2
